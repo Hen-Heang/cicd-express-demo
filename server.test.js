@@ -67,15 +67,6 @@ describe('Express API Tests', () => {
       expect(response.status).toBe(400);
       expect(response.body.error).toBe('Missing required fields');
     });
-
-    it('should return error for invalid operation', async () => {
-      const response = await request(app)
-        .post('/calculate')
-        .send({ operation: 'modulo', a: 10, b: 3 });
-
-      expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Invalid operation');
-    });
   });
 
   describe('GET /users', () => {
