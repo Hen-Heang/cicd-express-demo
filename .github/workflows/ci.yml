@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: "npm"
+          cache: 'npm'
 
       - run: npm ci
 
@@ -25,7 +25,6 @@ jobs:
 
       - name: Prettier check
         run: npm run format:check
-
   test:
     name: Test + Coverage
     runs-on: ubuntu-latest
@@ -38,7 +37,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: 'npm'
 
       - run: npm ci
 
@@ -51,7 +50,6 @@ jobs:
         with:
           name: coverage-report
           path: coverage/
-
   build:
     name: Build Verification
     needs: [lint, test]
@@ -61,7 +59,6 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t cicd-express-demo:${{ github.sha }} .
-
   quality-gate:
     name: Quality Gate
     needs: [lint, test, build]
@@ -69,7 +66,6 @@ jobs:
     steps:
       - name: All checks passed
         run: echo "✅ Lint, tests, and build all passed — safe to merge!"
-
   publish:
     name: Publish to GHCR
     needs: quality-gate
